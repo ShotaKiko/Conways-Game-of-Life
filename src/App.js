@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+const numOfRows= 30
+const numOfColumns = 60
+
 function App() {
+
+  const [grid, setGrid] = useState(() => {
+    const rows = []
+    for (let i = 0; i < numOfRows; i++) {
+      rows.push(Array.from(Array(numOfColumns), () => 0))
+    }
+    return rows
+  })
+
+  // console.log(grid)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{
+      display:"grid",
+      gridTemplateColumns:`repeat(${numOfColumns}, 20px)`
+    }}>
+      {grid.map((rows, rowIndex) => 
+        rows.map((col, colIndex) => (
+        <div key={`${rowIndex} - ${colIndex}`} 
+          style={{ 
+            width: 20, 
+            height: 20, 
+            backgroundColor: grid[rowIndex][colIndex] ? "blue" : undefined,
+            border: "1px solid grey"
+          }} 
+          />
+        ))
+      )}
     </div>
   );
 }
