@@ -17,14 +17,17 @@ const neighborCoordinates = [
   [1, 0]
 ]
 
-function Grid() {
-
-  const [grid, setGrid] = useState(() => {
-    const rows = []
+const generateEmptyGrid = () => {
+  const rows = []
     for (let i = 0; i < numOfRows; i++) {
       rows.push(Array.from(Array(numOfColumns), () => 0))
     }
     return rows
+}
+
+function Grid() {
+  const [grid, setGrid] = useState(() => {
+    return generateEmptyGrid()
   })
 
   const [isSimulationRunning, setSimulationRunning] = useState(false)
@@ -79,6 +82,20 @@ function Grid() {
     }}>
         {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
     </button>
+    
+    <button onClick={() => {
+      setGrid(generateEmptyGrid)
+      setSimulationRunning(false)
+    }}>Clear Grid</button>
+
+    <button onClick={()=> {
+      const rows = []
+      for (let i = 0; i < numOfRows; i++) {
+        rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.7 ? 1 : 0))
+      }
+      setGrid(rows)
+    }}>Randomize Grid</button>
+    
     <div className="Grid" 
         style={{
             display:"grid",
