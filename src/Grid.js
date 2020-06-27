@@ -3,8 +3,8 @@ import './App.css';
 
 import produce from 'immer'
 
-const numOfRows= 20
-const numOfColumns = 40
+const numOfRows= 40
+const numOfColumns = 80
 
 const neighborCoordinates = [
   [0, 1],
@@ -65,41 +65,48 @@ function Grid() {
       })
     })
 
-    setTimeout(runSimulation, 500)
+    setTimeout(runSimulation, 100)
 
   }, [])
 
 
   return (
     <>
-    {/* if sim is running we will display stop otherwise start if sim is not running */}
-    <button onClick={() => {
-        setSimulationRunning(!isSimulationRunning)
-        if (!isSimulationRunning) {
-          runningRef.current = true
-          runSimulation()
-        }
-    }}>
-        {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
-    </button>
-    
-    <button onClick={() => {
-      setGrid(generateEmptyGrid)
-      setSimulationRunning(false)
-    }}>Clear Grid</button>
+    <div className="buttonSection">
+      {/* if sim is running we will display stop otherwise start if sim is not running */}
+      <button onClick={() => {
+          setSimulationRunning(!isSimulationRunning)
+          if (!isSimulationRunning) {
+            runningRef.current = true
+            runSimulation()
+          }
+      }}>
+          {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
+      </button>
+      
+      <button onClick={() => {
+        setGrid(generateEmptyGrid)
+        setSimulationRunning(false)
+        }}
+      >
+        Clear Grid</button>
 
-    <button onClick={()=> {
-      const rows = []
-      for (let i = 0; i < numOfRows; i++) {
-        rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.7 ? 1 : 0))
-      }
-      setGrid(rows)
-    }}>Randomize Grid</button>
+      <button onClick={()=> {
+        const rows = []
+        for (let i = 0; i < numOfRows; i++) {
+          rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.7 ? 1 : 0))
+        }
+        setGrid(rows)
+        }}
+      >
+        Randomize Grid
+      </button>
+    </div>
     
     <div className="Grid" 
         style={{
             display:"grid",
-            gridTemplateColumns:`repeat(${numOfColumns}, 20px)`,
+            gridTemplateColumns:`repeat(${numOfColumns}, 15px)`,
         }}
         >
       {grid.map((rows, rowIndex) => 
@@ -114,9 +121,9 @@ function Grid() {
                 console.log(newGrid)
             }}
           style={{ 
-            width: 20, 
-            height: 20, 
-            backgroundColor: grid[rowIndex][colIndex] ? "steelblue" : undefined,
+            width: "15px", 
+            height: "15px", 
+            backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
             border: "1px solid grey"
           }} 
           />
