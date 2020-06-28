@@ -2,9 +2,33 @@ import React, { useState, useCallback, useRef } from 'react';
 import './App.css';
 
 import produce from 'immer'
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+const unactiveButtonColor = "steelBlue"
+const unactiveButtonFontColor = "#b1f1fa"
+
+const activeButtonColor = "#b1f1fa"
+const activeButtonFontColor = "steelBlue"
+
+const useStyles = makeStyles({
+  booton:{
+      color: unactiveButtonFontColor,
+      backgroundColor:unactiveButtonColor,
+      padding:"10px",
+      fontSize:"1rem",
+      borderRadius:"3px",
+      '&:hover': {
+          color: activeButtonFontColor,
+          backgroundColor: activeButtonColor
+        }
+  }
+})
+
 
 const numOfRows= 40
 const numOfColumns = 80
+
 
 const neighborCoordinates = [
   [0, 1],
@@ -29,6 +53,8 @@ function Grid() {
   const [grid, setGrid] = useState(() => {
     return generateEmptyGrid()
   })
+
+  const classes = useStyles()
 
   const [isSimulationRunning, setSimulationRunning] = useState(false)
 
@@ -74,7 +100,7 @@ function Grid() {
     <>
     <div className="buttonSection">
       {/* if sim is running we will display stop otherwise start if sim is not running */}
-      <button onClick={() => {
+      <Button className={classes.booton} variant="contained" onClick={() => {
           setSimulationRunning(!isSimulationRunning)
           if (!isSimulationRunning) {
             runningRef.current = true
@@ -82,16 +108,16 @@ function Grid() {
           }
       }}>
           {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
-      </button>
+      </Button>
       
-      <button onClick={() => {
+      <Button className={classes.booton} variant="contained" onClick={() => {
         setGrid(generateEmptyGrid)
         setSimulationRunning(false)
         }}
       >
-        Clear Grid</button>
+        Clear Grid</Button>
 
-      <button onClick={()=> {
+      <Button className={classes.booton} variant="contained" onClick={()=> {
         const rows = []
         for (let i = 0; i < numOfRows; i++) {
           rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.7 ? 1 : 0))
@@ -100,7 +126,7 @@ function Grid() {
         }}
       >
         Randomize Grid
-      </button>
+      </Button>
     </div>
     
     <div className="Grid" 
@@ -124,7 +150,8 @@ function Grid() {
             width: "15px", 
             height: "15px", 
             backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
-            border: "1px solid grey"
+            border: "1px solid grey",
+            borderRadius:"4px"
           }} 
           />
         ))

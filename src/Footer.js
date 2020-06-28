@@ -8,6 +8,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import lightBlue from '@material-ui/core/colors/teal';
 import grey from '@material-ui/core/colors/grey';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 
 const iconHoverColor = grey[50]
 const iconBackgroundHoverColor = lightBlue[200]
@@ -23,6 +24,12 @@ const useStyles = makeStyles({
             color: iconHoverColor,
             backgroundColor: iconBackgroundHoverColor
           }
+    },
+    link:{
+        color: "steelblue",
+        '&:hover': {
+            color: "#b1f1fa",
+          }
     }
 })
 
@@ -37,7 +44,7 @@ export default function Footer(){
         }}>
                 <div className="footerLinks">
                 
-                    <Button href="https://github.com/ShotaKiko" 
+                    <Button href="https://github.com/ShotaKiko/Burger-Builder" 
                         target="mynewtab" rel="noopener noreferrer">
                         <GitHubIcon className={classes.icon}
                             color="primary"
@@ -61,9 +68,9 @@ export default function Footer(){
                     </Button>
                 </div>
 
-                <div className="copyright">
+                <Link className={classes.link} href="https://www.shotakiko.com/" >
                     Shota Kikozashvili © 2020
-                </div>
+                </Link>
 
         </div>
         </section>
