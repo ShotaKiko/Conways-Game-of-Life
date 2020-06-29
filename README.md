@@ -1,4 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deployed Link (https://wizardly-mclean-be1e6b.netlify.app/)
 
 ## Available Scripts
 
