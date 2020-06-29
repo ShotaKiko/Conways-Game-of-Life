@@ -99,7 +99,7 @@ function Grid() {
   const classes = useStyles()
 
   const [isSimulationRunning, setSimulationRunning] = useState(false)
-  const [speed, setSpeed] = useState(50)
+  const [speed, setSpeed] = useState(6)
 
   const handleChange = (e, newSpeed) => {
     setSimulationRunning(false)
@@ -108,12 +108,12 @@ function Grid() {
 
   const handleSlowest = () => {
     setSimulationRunning(false)
-    setSpeed(10)
+    setSpeed(2)
   }
 
   const handleFastest = () => {
     setSimulationRunning(false)
-    setSpeed(100)
+    setSpeed(10)
   }
 
   const runningRef = useRef(isSimulationRunning)
@@ -152,7 +152,7 @@ function Grid() {
       })
     })
 
-    const simSpeed = (25000/speed)
+    const simSpeed = (100000/speed)
     setTimeout(runSimulation, simSpeed)
 
   }, [speed])
@@ -193,7 +193,7 @@ function Grid() {
       <SpeedGrid className={classes.root} container spacing={2}>
         <SpeedGrid item>
           <img 
-            className={speedRef.current === 10 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
+            className={speedRef.current === 2 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
             src={Snorlax} 
             alt="Slow like Snorlax"
             onClick={()=> {
@@ -206,20 +206,20 @@ function Grid() {
             className={classes.slider}
             defaultValue={speed}
             value={speedRef.current}
-            // aria-labelledby="discrete-slider"
-            aria-labelledby="continuous-slider"
-            // valueLabelDisplay="auto"
-            // step={25}
-            // marks
-            min={10}
-            max={100}
-            scale={(x) => x ** 2}
+            aria-labelledby="discrete-slider"
+            // aria-labelledby="continuous-slider"
+            valueLabelDisplay="auto"
+            step={2}
+            marks
+            min={2}
+            max={10}
+            scale={(x) => x ** 5}
             onChange={handleChange}
           />
         </SpeedGrid>
         <SpeedGrid item>
           <img 
-            className={speedRef.current === 100 ? "activatedSonicIcon" : "sonicIcon"} 
+            className={speedRef.current === 10 ? "activatedSonicIcon" : "sonicIcon"} 
             src={Sonic} 
             alt="Fast like Sonic"
             onClick={()=> {
