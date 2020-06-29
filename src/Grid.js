@@ -101,18 +101,15 @@ function Grid() {
   const [isSimulationRunning, setSimulationRunning] = useState(false)
   const [speed, setSpeed] = useState(2)
 
-  const handleChange = (e, newSpeed) => {
-    setSimulationRunning(false)
+  const handleSpeedChange = (e, newSpeed) => {
     setSpeed(newSpeed)
   }
 
   const handleSlowest = () => {
-    setSimulationRunning(false)
     setSpeed(1)
   }
 
   const handleFastest = () => {
-    setSimulationRunning(false)
     setSpeed(6)
   }
 
@@ -152,15 +149,15 @@ function Grid() {
       })
     })
 
-    if(speed < 5) {
-      const simSpeed = (2000/(speed))
+    if(speedRef.current < 5) {
+      const simSpeed = (2000/(speedRef.current))
       setTimeout(runSimulation, simSpeed)
-    } else if (speed === 5) {
+    } else if (speedRef.current === 5) {
       setTimeout(runSimulation, 100)
     } else {
       setTimeout(runSimulation, 10)
     }
-  }, [speed])
+  }, [])
 
 
   return (
@@ -213,12 +210,12 @@ function Grid() {
             value={speedRef.current}
             aria-labelledby="discrete-slider"
             // aria-labelledby="continuous-slider"
-            valueLabelDisplay="auto"
+            // valueLabelDisplay="auto"
             step={1}
             marks
             min={1}
             max={6}
-            onChange={handleChange}
+            onChange={handleSpeedChange}
           />
         </SpeedGrid>
         <SpeedGrid item>
