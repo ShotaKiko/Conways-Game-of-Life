@@ -99,7 +99,7 @@ function Grid() {
   const classes = useStyles()
 
   const [isSimulationRunning, setSimulationRunning] = useState(false)
-  const [speed, setSpeed] = useState(6)
+  const [speed, setSpeed] = useState(2)
 
   const handleChange = (e, newSpeed) => {
     setSimulationRunning(false)
@@ -108,12 +108,12 @@ function Grid() {
 
   const handleSlowest = () => {
     setSimulationRunning(false)
-    setSpeed(2)
+    setSpeed(1)
   }
 
   const handleFastest = () => {
     setSimulationRunning(false)
-    setSpeed(10)
+    setSpeed(6)
   }
 
   const runningRef = useRef(isSimulationRunning)
@@ -152,9 +152,14 @@ function Grid() {
       })
     })
 
-    const simSpeed = (100000/speed)
-    setTimeout(runSimulation, simSpeed)
-
+    if(speed < 5) {
+      const simSpeed = (2000/(speed))
+      setTimeout(runSimulation, simSpeed)
+    } else if (speed === 5) {
+      setTimeout(runSimulation, 100)
+    } else {
+      setTimeout(runSimulation, 10)
+    }
   }, [speed])
 
 
@@ -193,7 +198,7 @@ function Grid() {
       <SpeedGrid className={classes.root} container spacing={2}>
         <SpeedGrid item>
           <img 
-            className={speedRef.current === 2 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
+            className={speedRef.current === 1 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
             src={Snorlax} 
             alt="Slow like Snorlax"
             onClick={()=> {
@@ -209,17 +214,16 @@ function Grid() {
             aria-labelledby="discrete-slider"
             // aria-labelledby="continuous-slider"
             valueLabelDisplay="auto"
-            step={2}
+            step={1}
             marks
-            min={2}
-            max={10}
-            scale={(x) => x ** 5}
+            min={1}
+            max={6}
             onChange={handleChange}
           />
         </SpeedGrid>
         <SpeedGrid item>
           <img 
-            className={speedRef.current === 10 ? "activatedSonicIcon" : "sonicIcon"} 
+            className={speedRef.current === 6 ? "activatedSonicIcon" : "sonicIcon"} 
             src={Sonic} 
             alt="Fast like Sonic"
             onClick={()=> {
