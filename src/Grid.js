@@ -5,7 +5,7 @@ import Snorlax from "./icons/snorlax.png"
 
 import produce from 'immer'
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import SpeedGrid from '@material-ui/core/Grid';
 
@@ -40,6 +40,33 @@ const useStyles = makeStyles({
   }
 })
 
+const SpeedSlider = withStyles({
+  root: {
+    color: '#b1f1fa',
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    marginTop: -8,
+    marginLeft: -12,
+    '&:focus, &:hover, &$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 7,
+    borderRadius: 4,
+  },
+})(Slider);
+
 
 const numOfRows= 40
 const numOfColumns = 80
@@ -72,7 +99,7 @@ function Grid() {
   const classes = useStyles()
 
   const [isSimulationRunning, setSimulationRunning] = useState(false)
-  const [speed, setSpeed] = useState(200)
+  const [speed, setSpeed] = useState(50)
 
   const handleChange = (e, newSpeed) => {
     setSimulationRunning(false)
@@ -81,12 +108,12 @@ function Grid() {
 
   const handleSlowest = () => {
     setSimulationRunning(false)
-    setSpeed(1)
+    setSpeed(10)
   }
 
   const handleFastest = () => {
     setSimulationRunning(false)
-    setSpeed(1001)
+    setSpeed(100)
   }
 
   const runningRef = useRef(isSimulationRunning)
@@ -125,7 +152,7 @@ function Grid() {
       })
     })
 
-    const simSpeed = (1000/speed)
+    const simSpeed = (25000/speed)
     setTimeout(runSimulation, simSpeed)
 
   }, [speed])
@@ -166,7 +193,7 @@ function Grid() {
       <SpeedGrid className={classes.root} container spacing={2}>
         <SpeedGrid item>
           <img 
-            className={speedRef.current === 1 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
+            className={speedRef.current === 10 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
             src={Snorlax} 
             alt="Slow like Snorlax"
             onClick={()=> {
@@ -175,21 +202,24 @@ function Grid() {
           />
         </SpeedGrid>
         <SpeedGrid>
-          <Slider
+          <SpeedSlider
             className={classes.slider}
             defaultValue={speed}
             value={speedRef.current}
-            aria-labelledby="discrete-slider"
-            step={200}
-            marks
-            min={1}
-            max={1001}
+            // aria-labelledby="discrete-slider"
+            aria-labelledby="continuous-slider"
+            // valueLabelDisplay="auto"
+            // step={25}
+            // marks
+            min={10}
+            max={100}
+            scale={(x) => x ** 2}
             onChange={handleChange}
           />
         </SpeedGrid>
         <SpeedGrid item>
           <img 
-            className={speedRef.current === 1001 ? "activatedSonicIcon" : "sonicIcon"} 
+            className={speedRef.current === 100 ? "activatedSonicIcon" : "sonicIcon"} 
             src={Sonic} 
             alt="Fast like Sonic"
             onClick={()=> {
