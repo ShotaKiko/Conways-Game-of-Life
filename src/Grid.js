@@ -14,6 +14,7 @@ import SpeedGrid from '@material-ui/core/Grid';
 //Coordinate Imports
 import neighboringCoordinates from './displacementCoordibates/neighboringCoordinates.js'
 import toadCoordinates from './displacementCoordibates/toadCoordinates.js'
+import beaconCoordinates from './displacementCoordibates/beaconCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
       backgroundColor:unactiveButtonColor,
       padding:"7px",
       fontSize:".9rem",
-      borderRadius:"3px",
+      // borderRadius:"3px",
       '&:hover': {
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
@@ -126,12 +127,12 @@ function Grid() {
   const [grid, setGrid] = useState(() => {
     return generateEmptyGrid()
   })
-
   const classes = useStyles()
-
+  
   const [isSimulationRunning, setSimulationRunning] = useState(false)
   const [speed, setSpeed] = useState(2)
 
+  //SPEED HANDLERS
   const handleSpeedChange = (e, newSpeed) => {
     setSpeed(newSpeed)
   }
@@ -144,27 +145,31 @@ function Grid() {
     setSpeed(6)
   }
 
-  const handleToadInsert = () => {
+
+  //GENERAL INSERT FUNCTION
+  const insertPattern = (displacementCoordinates) => {
     setGrid(generateEmptyGrid)
-    setSimulationRunning(false)
-    // console.log("TOAD COORDINATES", toadCoordinates)
     setGrid( g => {
       return produce(g, gridCopy => {
         const r = getRandomLocationRow()
         const c = getRandomLocationColumn()
-        toadCoordinates.forEach(([x, y]) => {
-          const newR = r + y
-          const newC = c + x
+        displacementCoordinates.forEach(([x, y]) => {
+          const newR = r + x
+          const newC = c + y
           gridCopy[newR][newC] = 1
         })
       })
     })
+    setSpeed(5)
+  }
 
+  // PRESET PATTERNS INSERT HANDLERS
+  const handleToadInsert = () => {
+    insertPattern(toadCoordinates)
+  }
 
-    // const toadGrid = produce(grid, gridCopy => {
-    //   gridCopy[10][10] = 1
-    // })
-    // setGrid(toadGrid)
+  const handleBeaconInsert =() => {
+    insertPattern(beaconCoordinates)
   }
 
   const runningRef = useRef(isSimulationRunning)
@@ -175,6 +180,8 @@ function Grid() {
 
   // console.log(grid)
 
+
+  //SIMULATION LOGIC
   const runSimulation = useCallback(() => {
     //simulate and see if we are running
     if(!runningRef.current){
@@ -218,8 +225,8 @@ function Grid() {
     <>
     <div className="buttonSection">
       {/* if sim is running we will display stop otherwise start if sim is not running */}
-      <ButtonGroup variant="contained">
-        <Button className={classes.booton} variant="contained" onClick={() => {
+      <ButtonGroup  orientation="vertical">
+        <Button className={classes.booton} onClick={() => {
             setSimulationRunning(!isSimulationRunning)
             if (!isSimulationRunning) {
               runningRef.current = true
@@ -229,14 +236,14 @@ function Grid() {
             {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
         </Button>
         
-        <Button className={classes.booton} variant="contained" onClick={() => {
+        <Button className={classes.booton} onClick={() => {
           setGrid(generateEmptyGrid)
           setSimulationRunning(false)
           }}
         >
           Clear Grid</Button>
 
-        <Button className={classes.booton} variant="contained" onClick={()=> {
+        <Button className={classes.booton} onClick={()=> {
           const rows = []
           for (let i = 0; i < numOfRows; i++) {
             rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.8 ? 1 : 0))
@@ -284,6 +291,15 @@ function Grid() {
           />
         </SpeedGrid>
       </SpeedGrid>
+      
+      <div className="insertSection">
+        <ButtonGroup orientation="vertical" >
+          <Button className={classes.booton} onClick={handleToadInsert}>Toad</Button>
+          <Button className={classes.booton} onClick={handleBeaconInsert}>Beacon</Button>
+          <Button className={classes.booton}>Three</Button>
+        </ButtonGroup>
+      </div>
+    
     </div>
     <div className="contentSection">
       <div className="Grid" 
@@ -313,13 +329,6 @@ function Grid() {
             />
           ))
         )}
-      </div>
-      <div className="insertSection">
-        <ButtonGroup orientation="vertical" >
-          <Button className={classes.booton} onClick={handleToadInsert}>Toad</Button>
-          <Button className={classes.booton}>Two</Button>
-          <Button className={classes.booton}>Three</Button>
-        </ButtonGroup>
       </div>
     </div>
     
