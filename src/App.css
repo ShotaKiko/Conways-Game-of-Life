@@ -17,13 +17,19 @@
 }
 
 .gridContainer {
-  border: 1px solid #181E28;
+  /* border: 1px solid white; */
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #181E28 ;
   min-height: 80vh;
   margin-top: 4vh;
+}
+.contentSection {
+  /* border:1px dashed pink; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .buttonSection {

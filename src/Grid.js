@@ -5,15 +5,22 @@ import Snorlax from "./icons/snorlax.png"
 
 import produce from 'immer'
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import SpeedGrid from '@material-ui/core/Grid';
+
+
+//Coordinate Imports
+import neighboringCoordinates from './displacementCoordibates/neighboringCoordinates.js'
+import toadCoordinates from './displacementCoordibates/toadCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
 
 const activeButtonColor = "#b1f1fa"
 const activeButtonFontColor = "steelBlue"
+
 
 const useStyles = makeStyles({
   root:{
@@ -30,8 +37,8 @@ const useStyles = makeStyles({
   booton:{
       color: unactiveButtonFontColor,
       backgroundColor:unactiveButtonColor,
-      padding:"10px",
-      fontSize:"1rem",
+      padding:"7px",
+      fontSize:".9rem",
       borderRadius:"3px",
       '&:hover': {
           color: activeButtonFontColor,
@@ -71,17 +78,41 @@ const SpeedSlider = withStyles({
 const numOfRows= 40
 const numOfColumns = 80
 
+const lowerThreshold = .3
+const upperThreshold = .7
 
-const neighborCoordinates = [
-  [0, 1],
-  [0, -1],
-  [1, -1],
-  [-1, 1],
-  [1, 1],
-  [-1, -1],
-  [-1, 0],
-  [1, 0]
-]
+const directionalMin = (gridDirectionRange) => {
+  const rangeMin = Math.ceil(gridDirectionRange * lowerThreshold)
+  // console.log("MIN" , rangeMin)
+  
+  return rangeMin
+}
+
+const directionalMax = (gridDirectionRange) => {
+  const rangeMax = Math.floor(gridDirectionRange * upperThreshold)
+  // console.log("Max" , rangeMax)
+
+  return rangeMax
+}
+
+//gets a random row location based on grid size and thresholds established above
+const getRandomLocationRow = () => {
+  const min = directionalMin(numOfRows)
+  const max = directionalMax(numOfRows)
+  const randomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
+  // console.log("RANDOM ROW LOCATION", randomRowLoc)
+
+  return randomRowLoc
+}
+
+const getRandomLocationColumn = () => {
+  const min = directionalMin(numOfColumns)
+  const max = directionalMax(numOfColumns)
+  const randomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
+  // console.log("RANDOM COLUMN LOCATION", randomColumnLoc)
+
+  return randomColumnLoc
+}
 
 const generateEmptyGrid = () => {
   const rows = []
@@ -113,6 +144,29 @@ function Grid() {
     setSpeed(6)
   }
 
+  const handleToadInsert = () => {
+    setGrid(generateEmptyGrid)
+    setSimulationRunning(false)
+    // console.log("TOAD COORDINATES", toadCoordinates)
+    setGrid( g => {
+      return produce(g, gridCopy => {
+        const r = getRandomLocationRow()
+        const c = getRandomLocationColumn()
+        toadCoordinates.forEach(([x, y]) => {
+          const newR = r + y
+          const newC = c + x
+          gridCopy[newR][newC] = 1
+        })
+      })
+    })
+
+
+    // const toadGrid = produce(grid, gridCopy => {
+    //   gridCopy[10][10] = 1
+    // })
+    // setGrid(toadGrid)
+  }
+
   const runningRef = useRef(isSimulationRunning)
   runningRef.current = isSimulationRunning
 
@@ -132,7 +186,7 @@ function Grid() {
         for (let r= 0; r < numOfRows; r++) {
           for(let c = 0; c < numOfColumns; c++) {
             let neighborsCount = 0 //dead cells
-            neighborCoordinates.forEach(([x, y]) => {
+            neighboringCoordinates.forEach(([x, y]) => {
               const newR = r + x
               const newC = c + y
               if (newR >= 0 && newR < numOfRows && newC >= 0 && newC < numOfColumns) {
@@ -164,34 +218,35 @@ function Grid() {
     <>
     <div className="buttonSection">
       {/* if sim is running we will display stop otherwise start if sim is not running */}
-      <Button className={classes.booton} variant="contained" onClick={() => {
-          setSimulationRunning(!isSimulationRunning)
-          if (!isSimulationRunning) {
-            runningRef.current = true
-            runSimulation()
-          }
-      }}>
-          {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
-      </Button>
-      
-      <Button className={classes.booton} variant="contained" onClick={() => {
-        setGrid(generateEmptyGrid)
-        setSimulationRunning(false)
-        }}
-      >
-        Clear Grid</Button>
+      <ButtonGroup variant="contained">
+        <Button className={classes.booton} variant="contained" onClick={() => {
+            setSimulationRunning(!isSimulationRunning)
+            if (!isSimulationRunning) {
+              runningRef.current = true
+              runSimulation()
+            }
+        }}>
+            {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
+        </Button>
+        
+        <Button className={classes.booton} variant="contained" onClick={() => {
+          setGrid(generateEmptyGrid)
+          setSimulationRunning(false)
+          }}
+        >
+          Clear Grid</Button>
 
-      <Button className={classes.booton} variant="contained" onClick={()=> {
-        const rows = []
-        for (let i = 0; i < numOfRows; i++) {
-          rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.8 ? 1 : 0))
-        }
-        setGrid(rows)
-        }}
-      >
-        Randomize Grid
-      </Button>
-      
+        <Button className={classes.booton} variant="contained" onClick={()=> {
+          const rows = []
+          for (let i = 0; i < numOfRows; i++) {
+            rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.8 ? 1 : 0))
+          }
+          setGrid(rows)
+          }}
+        >
+          Randomize Grid
+        </Button>
+      </ButtonGroup>
       <SpeedGrid className={classes.root} container spacing={2}>
         <SpeedGrid item>
           <img 
@@ -230,35 +285,44 @@ function Grid() {
         </SpeedGrid>
       </SpeedGrid>
     </div>
-    
-    <div className="Grid" 
-        style={{
-            display:"grid",
-            gridTemplateColumns:`repeat(${numOfColumns}, 15px)`,
-        }}
-        >
-      {grid.map((rows, rowIndex) => 
-        rows.map((col, colIndex) => (
-        <div key={`${rowIndex} - ${colIndex}`} 
-            onClick={() => {
-                const newGrid = produce(grid, gridCopy =>{
-                    //if grid at this index is alive kill it, if dead set to alive
-                    gridCopy[rowIndex][colIndex] = grid[rowIndex][colIndex] ? 0 : 1
-                })
-                setGrid(newGrid)
-                console.log(newGrid)
-            }}
-          style={{ 
-            width: "15px", 
-            height: "15px", 
-            backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
-            border: "1px solid grey",
-            borderRadius:"4px"
-          }} 
-          />
-        ))
-      )}
+    <div className="contentSection">
+      <div className="Grid" 
+          style={{
+              display:"grid",
+              gridTemplateColumns:`repeat(${numOfColumns}, 15px)`,
+          }}
+          >
+        {grid.map((rows, rowIndex) => 
+          rows.map((col, colIndex) => (
+          <div key={`${rowIndex} - ${colIndex}`} 
+              onClick={() => {
+                  const newGrid = produce(grid, gridCopy =>{
+                      //if grid at this index is alive kill it, if dead set to alive
+                      gridCopy[rowIndex][colIndex] = grid[rowIndex][colIndex] ? 0 : 1
+                  })
+                  setGrid(newGrid)
+                  // console.log(newGrid)
+              }}
+            style={{ 
+              width: "15px", 
+              height: "15px", 
+              backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
+              border: "1px solid grey",
+              borderRadius:"4px"
+            }} 
+            />
+          ))
+        )}
+      </div>
+      <div className="insertSection">
+        <ButtonGroup orientation="vertical" >
+          <Button className={classes.booton} onClick={handleToadInsert}>Toad</Button>
+          <Button className={classes.booton}>Two</Button>
+          <Button className={classes.booton}>Three</Button>
+        </ButtonGroup>
+      </div>
     </div>
+    
   </>
   );
 }

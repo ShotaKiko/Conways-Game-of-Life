@@ -11,9 +11,9 @@ function App() {
       <Header  />
       <div className="gridContainer">
         <Grid />
-    </div>
-      <Footer />
       </div>
+      <Footer />
+    </div>
   );
 }
 
