@@ -15,6 +15,7 @@ import SpeedGrid from '@material-ui/core/Grid';
 import neighboringCoordinates from './displacementCoordibates/neighboringCoordinates.js'
 import toadCoordinates from './displacementCoordibates/toadCoordinates.js'
 import beaconCoordinates from './displacementCoordibates/beaconCoordinates.js'
+import pentadecathalonCoordinates from './displacementCoordibates/pentadecathalonCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -79,8 +80,8 @@ const SpeedSlider = withStyles({
 const numOfRows= 40
 const numOfColumns = 80
 
-const lowerThreshold = .3
-const upperThreshold = .7
+const lowerThreshold = .15
+const upperThreshold = .85
 
 const directionalMin = (gridDirectionRange) => {
   const rangeMin = Math.ceil(gridDirectionRange * lowerThreshold)
@@ -148,7 +149,7 @@ function Grid() {
 
   //GENERAL INSERT FUNCTION
   const insertPattern = (displacementCoordinates) => {
-    setGrid(generateEmptyGrid)
+    // setGrid(generateEmptyGrid)
     setGrid( g => {
       return produce(g, gridCopy => {
         const r = getRandomLocationRow()
@@ -170,6 +171,10 @@ function Grid() {
 
   const handleBeaconInsert =() => {
     insertPattern(beaconCoordinates)
+  }
+
+  const handlePentadecathalonInsert = () => {
+    insertPattern(pentadecathalonCoordinates)
   }
 
   const runningRef = useRef(isSimulationRunning)
@@ -296,7 +301,7 @@ function Grid() {
         <ButtonGroup orientation="vertical" >
           <Button className={classes.booton} onClick={handleToadInsert}>Toad</Button>
           <Button className={classes.booton} onClick={handleBeaconInsert}>Beacon</Button>
-          <Button className={classes.booton}>Three</Button>
+          <Button className={classes.booton} onClick={handlePentadecathalonInsert}>Pentadecathalon</Button>
         </ButtonGroup>
       </div>
     
