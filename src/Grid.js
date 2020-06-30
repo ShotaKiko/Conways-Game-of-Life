@@ -16,6 +16,7 @@ import neighboringCoordinates from './displacementCoordibates/neighboringCoordin
 import toadCoordinates from './displacementCoordibates/toadCoordinates.js'
 import beaconCoordinates from './displacementCoordibates/beaconCoordinates.js'
 import pentadecathalonCoordinates from './displacementCoordibates/pentadecathalonCoordinates.js'
+import pulsarCoordinates from './displacementCoordibates/pulsarCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -45,7 +46,18 @@ const useStyles = makeStyles({
       '&:hover': {
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
-        }
+      }
+  },
+  insert:{
+      color: unactiveButtonFontColor,
+      backgroundColor:unactiveButtonColor,
+      padding:"5px",
+      fontSize:".7rem",
+      // borderRadius:"3px",
+      '&:hover': {
+          color: activeButtonFontColor,
+          backgroundColor: activeButtonColor
+      }
   }
 })
 
@@ -77,8 +89,8 @@ const SpeedSlider = withStyles({
 })(Slider);
 
 
-const numOfRows= 40
-const numOfColumns = 80
+const numOfRows= 35
+const numOfColumns = 90
 
 const lowerThreshold = .15
 const upperThreshold = .85
@@ -97,7 +109,7 @@ const directionalMax = (gridDirectionRange) => {
   return rangeMax
 }
 
-//gets a random row location based on grid size and thresholds established above
+//gets a random row & col locations based on grid size and thresholds established above
 const getRandomLocationRow = () => {
   const min = directionalMin(numOfRows)
   const max = directionalMax(numOfRows)
@@ -161,7 +173,9 @@ function Grid() {
         })
       })
     })
-    setSpeed(5)
+    if (speedRef.current !==6 && speedRef.current !==4){
+      setSpeed(5)
+    }
   }
 
   // PRESET PATTERNS INSERT HANDLERS
@@ -175,6 +189,10 @@ function Grid() {
 
   const handlePentadecathalonInsert = () => {
     insertPattern(pentadecathalonCoordinates)
+  }
+
+  const handledPulsarInsert = () => {
+    insertPattern(pulsarCoordinates)
   }
 
   const runningRef = useRef(isSimulationRunning)
@@ -228,37 +246,41 @@ function Grid() {
 
   return (
     <>
-    <div className="buttonSection">
-      {/* if sim is running we will display stop otherwise start if sim is not running */}
-      <ButtonGroup  orientation="vertical">
-        <Button className={classes.booton} onClick={() => {
-            setSimulationRunning(!isSimulationRunning)
-            if (!isSimulationRunning) {
-              runningRef.current = true
-              runSimulation()
-            }
-        }}>
-            {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
-        </Button>
-        
-        <Button className={classes.booton} onClick={() => {
-          setGrid(generateEmptyGrid)
-          setSimulationRunning(false)
-          }}
-        >
-          Clear Grid</Button>
+    <div className="buttonInputSection">
+      <div className="controls">
+        <h5>Controls</h5>
+        {/* if sim is running we will display stop otherwise start if sim is not running */}
+        <ButtonGroup  orientation="vertical">
+          <Button className={classes.booton} onClick={() => {
+              setSimulationRunning(!isSimulationRunning)
+              if (!isSimulationRunning) {
+                runningRef.current = true
+                runSimulation()
+              }
+          }}>
+              {isSimulationRunning ? "Stop Simulation" : "Start Simulation"}
+          </Button>
+          
+          <Button className={classes.booton} onClick={() => {
+            setGrid(generateEmptyGrid)
+            setSimulationRunning(false)
+            }}
+          >
+            Clear Grid</Button>
 
-        <Button className={classes.booton} onClick={()=> {
-          const rows = []
-          for (let i = 0; i < numOfRows; i++) {
-            rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.8 ? 1 : 0))
-          }
-          setGrid(rows)
-          }}
-        >
-          Randomize Grid
-        </Button>
-      </ButtonGroup>
+          <Button className={classes.booton} onClick={()=> {
+            const rows = []
+            for (let i = 0; i < numOfRows; i++) {
+              rows.push(Array.from(Array(numOfColumns), () => Math.random() > 0.8 ? 1 : 0))
+            }
+            setGrid(rows)
+            }}
+          >
+            Randomize Grid
+          </Button>
+        </ButtonGroup>
+      </div>
+      
       <SpeedGrid className={classes.root} container spacing={2}>
         <SpeedGrid item>
           <img 
@@ -298,10 +320,12 @@ function Grid() {
       </SpeedGrid>
       
       <div className="insertSection">
+        <h5>Oscillators</h5>
         <ButtonGroup orientation="vertical" >
-          <Button className={classes.booton} onClick={handleToadInsert}>Toad</Button>
-          <Button className={classes.booton} onClick={handleBeaconInsert}>Beacon</Button>
-          <Button className={classes.booton} onClick={handlePentadecathalonInsert}>Pentadecathalon</Button>
+          <Button className={classes.insert} onClick={handleToadInsert}>Toad</Button>
+          <Button className={classes.insert} onClick={handleBeaconInsert}>Beacon</Button>
+          <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Pentadecathalon</Button>
+          <Button className={classes.insert} onClick={handledPulsarInsert}>Pulsar</Button>        
         </ButtonGroup>
       </div>
     

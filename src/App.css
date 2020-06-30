@@ -23,7 +23,7 @@
   align-items: center;
   background-color: #181E28 ;
   min-height: 80vh;
-  margin-top: 4vh;
+  margin-top: 1vh;
 }
 .contentSection {
   /* border:1px dashed pink; */
@@ -32,12 +32,27 @@
   justify-content: center;
 }
 
-.buttonSection {
+.buttonInputSection {
+  /* border:1px dashed red; */
   margin-bottom: 2vh;
   width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center
+}
+
+h5 {
+  color: #b1f1fa;  
+}
+
+h5:hover {
+  color: steelblue;
+}
+
+.insertSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sonicIcon:hover {
