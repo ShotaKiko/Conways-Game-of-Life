@@ -19,6 +19,7 @@ import pentadecathalonCoordinates from './displacementCoordibates/pentadecathalo
 import pulsarCoordinates from './displacementCoordibates/pulsarCoordinates.js'
 import loafCoordinates from './displacementCoordibates/loafCoordinates.js'
 import beeHiveCoordinates from './displacementCoordibates/beeHiveCoordinates.js'
+import tubCoordinates from './displacementCoordibates/tubCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -205,6 +206,10 @@ function Grid() {
     insertPattern(beeHiveCoordinates)
   }
 
+  const handleTubInsert = () => {
+    insertPattern(tubCoordinates)
+  }
+
   const runningRef = useRef(isSimulationRunning)
   runningRef.current = isSimulationRunning
 
@@ -374,12 +379,12 @@ function Grid() {
         </div>
 
         <div className="staticDiv">
-          <h5>Statics</h5>
+          <h5>Still Life</h5>
           <ButtonGroup orientation="vertical" >
             <Button className={classes.insert} onClick={handleLoafInsert}>Loaf</Button>
             <Button className={classes.insert} onClick={handleHiveInsert}>Bee-Hive</Button>
             <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Boat</Button>
-            <Button className={classes.insert} onClick={handledPulsarInsert}>Tub</Button>        
+            <Button className={classes.insert} onClick={handleTubInsert}>Tub</Button>        
           </ButtonGroup>
         </div>
       </div>
