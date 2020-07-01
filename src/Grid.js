@@ -20,6 +20,9 @@ import pulsarCoordinates from './displacementCoordibates/pulsarCoordinates.js'
 import loafCoordinates from './displacementCoordibates/loafCoordinates.js'
 import beeHiveCoordinates from './displacementCoordibates/beeHiveCoordinates.js'
 import tubCoordinates from './displacementCoordibates/tubCoordinates.js'
+import boatCoordinates from './displacementCoordibates/boatCoordinates.js'
+import gliderCoordinates from './displacementCoordibates/gliderCoordinates.js'
+import LWSSCoordinates from './displacementCoordibates/LWSSCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -210,6 +213,18 @@ function Grid() {
     insertPattern(tubCoordinates)
   }
 
+  const handleBoatInsert = () => {
+    insertPattern(boatCoordinates)
+  }
+
+  const handleGliderInsert = () => {
+    insertPattern(gliderCoordinates)
+  }
+
+  const handleLWSSInsert = () => {
+    insertPattern(LWSSCoordinates)
+  }
+
   const runningRef = useRef(isSimulationRunning)
   runningRef.current = isSimulationRunning
 
@@ -383,8 +398,19 @@ function Grid() {
           <ButtonGroup orientation="vertical" >
             <Button className={classes.insert} onClick={handleLoafInsert}>Loaf</Button>
             <Button className={classes.insert} onClick={handleHiveInsert}>Bee-Hive</Button>
-            <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Boat</Button>
+            <Button className={classes.insert} onClick={handleBoatInsert}>Boat</Button>
             <Button className={classes.insert} onClick={handleTubInsert}>Tub</Button>        
+          </ButtonGroup>
+        </div>
+
+        <div className="spaceshipDiv">
+          <h5>Space Ships</h5>
+          <ButtonGroup orientation="vertical" >
+            <Button className={classes.insert} onClick={handleGliderInsert}>Glider</Button>
+            <Button className={classes.insert} onClick={handleLWSSInsert}>Light Spaceship</Button>
+          
+            {/* <Button className={classes.insert} onClick={handleMWSSINsert}>Middle Spaceship</Button>
+            <Button className={classes.insert} onClick={handleHWSSInsert}>Heavy Spaceship</Button>         */}
           </ButtonGroup>
         </div>
       </div>
