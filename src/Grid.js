@@ -17,6 +17,7 @@ import toadCoordinates from './displacementCoordibates/toadCoordinates.js'
 import beaconCoordinates from './displacementCoordibates/beaconCoordinates.js'
 import pentadecathalonCoordinates from './displacementCoordibates/pentadecathalonCoordinates.js'
 import pulsarCoordinates from './displacementCoordibates/pulsarCoordinates.js'
+import loafCoordinates from './displacementCoordibates/loafCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -195,6 +196,10 @@ function Grid() {
     insertPattern(pulsarCoordinates)
   }
 
+  const handleLoafInsert = () => {
+    insertPattern(loafCoordinates)
+  }
+
   const runningRef = useRef(isSimulationRunning)
   runningRef.current = isSimulationRunning
 
@@ -246,6 +251,38 @@ function Grid() {
 
   return (
     <>
+    
+    <div className="contentSection">
+      <div className="Grid" 
+          style={{
+              display:"grid",
+              gridTemplateColumns:`repeat(${numOfColumns}, 10px)`,
+          }}
+          >
+        {grid.map((rows, rowIndex) => 
+          rows.map((col, colIndex) => (
+          <div key={`${rowIndex} - ${colIndex}`} 
+              onClick={() => {
+                  const newGrid = produce(grid, gridCopy =>{
+                      //if grid at this index is alive kill it, if dead set to alive
+                      gridCopy[rowIndex][colIndex] = grid[rowIndex][colIndex] ? 0 : 1
+                  })
+                  setGrid(newGrid)
+                  // console.log(newGrid)
+              }}
+            style={{ 
+              width: "10px", 
+              height: "10px", 
+              backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
+              border: ".5px solid grey",
+              borderRadius:"2px"
+            }} 
+            />
+          ))
+        )}
+      </div>
+    </div>
+
     <div className="buttonInputSection">
       <div className="controls">
         <h5>Controls</h5>
@@ -320,45 +357,30 @@ function Grid() {
       </SpeedGrid>
       
       <div className="insertSection">
-        <h5>Oscillators</h5>
-        <ButtonGroup orientation="vertical" >
-          <Button className={classes.insert} onClick={handleToadInsert}>Toad</Button>
-          <Button className={classes.insert} onClick={handleBeaconInsert}>Beacon</Button>
-          <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Pentadecathalon</Button>
-          <Button className={classes.insert} onClick={handledPulsarInsert}>Pulsar</Button>        
-        </ButtonGroup>
+
+        <div className="oscillatorsDiv">
+          <h5>Oscillators</h5>
+          <ButtonGroup orientation="vertical" >
+            <Button className={classes.insert} onClick={handleToadInsert}>Toad</Button>
+            <Button className={classes.insert} onClick={handleBeaconInsert}>Beacon</Button>
+            <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Pentadecathalon</Button>
+            <Button className={classes.insert} onClick={handledPulsarInsert}>Pulsar</Button>        
+          </ButtonGroup>
+        </div>
+
+        <div className="staticDiv">
+          <h5>Statics</h5>
+          <ButtonGroup orientation="vertical" >
+            <Button className={classes.insert} onClick={handleLoafInsert}>Loaf</Button>
+            <Button className={classes.insert} onClick={handleBeaconInsert}>Bee-Hive</Button>
+            <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Boat</Button>
+            <Button className={classes.insert} onClick={handledPulsarInsert}>Tub</Button>        
+          </ButtonGroup>
+        </div>
       </div>
+
+      
     
-    </div>
-    <div className="contentSection">
-      <div className="Grid" 
-          style={{
-              display:"grid",
-              gridTemplateColumns:`repeat(${numOfColumns}, 15px)`,
-          }}
-          >
-        {grid.map((rows, rowIndex) => 
-          rows.map((col, colIndex) => (
-          <div key={`${rowIndex} - ${colIndex}`} 
-              onClick={() => {
-                  const newGrid = produce(grid, gridCopy =>{
-                      //if grid at this index is alive kill it, if dead set to alive
-                      gridCopy[rowIndex][colIndex] = grid[rowIndex][colIndex] ? 0 : 1
-                  })
-                  setGrid(newGrid)
-                  // console.log(newGrid)
-              }}
-            style={{ 
-              width: "15px", 
-              height: "15px", 
-              backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
-              border: "1px solid grey",
-              borderRadius:"4px"
-            }} 
-            />
-          ))
-        )}
-      </div>
     </div>
     
   </>

@@ -30,6 +30,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 5vh;
 }
 
 .buttonInputSection {
@@ -51,8 +52,9 @@ h5:hover {
 
 .insertSection {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+ justify-content: space-evenly;
+ /* border: 2px solid white; */
+ width: 30%;
 }
 
 .sonicIcon:hover {
