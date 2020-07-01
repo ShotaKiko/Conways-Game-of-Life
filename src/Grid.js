@@ -23,6 +23,7 @@ import tubCoordinates from './displacementCoordibates/tubCoordinates.js'
 import boatCoordinates from './displacementCoordibates/boatCoordinates.js'
 import gliderCoordinates from './displacementCoordibates/gliderCoordinates.js'
 import LWSSCoordinates from './displacementCoordibates/LWSSCoordinates.js'
+import MWSSCoordinates from './displacementCoordibates/MWSSCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -225,6 +226,10 @@ function Grid() {
     insertPattern(LWSSCoordinates)
   }
 
+  const handleMWSSInsert = () => {
+    insertPattern(MWSSCoordinates)
+  }
+
   const runningRef = useRef(isSimulationRunning)
   runningRef.current = isSimulationRunning
 
@@ -407,10 +412,9 @@ function Grid() {
           <h5>Space Ships</h5>
           <ButtonGroup orientation="vertical" >
             <Button className={classes.insert} onClick={handleGliderInsert}>Glider</Button>
-            <Button className={classes.insert} onClick={handleLWSSInsert}>Light Spaceship</Button>
-          
-            {/* <Button className={classes.insert} onClick={handleMWSSINsert}>Middle Spaceship</Button>
-            <Button className={classes.insert} onClick={handleHWSSInsert}>Heavy Spaceship</Button>         */}
+            <Button className={classes.insert} onClick={handleLWSSInsert}>Light Weight Ship</Button>
+            <Button className={classes.insert} onClick={handleMWSSInsert}>Middle Weigtht Ship</Button>
+            {/* <Button className={classes.insert} onClick={handleHWSSInsert}>Heavy Spaceship</Button>         */}
           </ButtonGroup>
         </div>
       </div>
