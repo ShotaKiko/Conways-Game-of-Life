@@ -9,9 +9,12 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "immer": "^7.0.4",
+    "material-auto-rotating-carousel": "^3.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-swipeable-views": "^0.13.9",
+    "save": "^2.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
