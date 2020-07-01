@@ -24,6 +24,7 @@ import boatCoordinates from './displacementCoordibates/boatCoordinates.js'
 import gliderCoordinates from './displacementCoordibates/gliderCoordinates.js'
 import LWSSCoordinates from './displacementCoordibates/LWSSCoordinates.js'
 import MWSSCoordinates from './displacementCoordibates/MWSSCoordinates.js'
+import gosperGliderGunCoordinates from './displacementCoordibates/gosperGliderGunCoordinates.js'
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -95,23 +96,55 @@ const SpeedSlider = withStyles({
   },
 })(Slider);
 
-
+//MODIFIABLE TO CHANGE GRID SIZE
 const numOfRows= 35
 const numOfColumns = 90
 
+//These vars affect random point of pattern insert
 const lowerThreshold = .15
 const upperThreshold = .85
 
+const gosperLowerThreshold = .35
+const gosperUpperThreshold = .65
+
+//selects more centered coordinate for gosper glider pattern
+const gMin = (gridDirectionRange) => {
+  const gRangeMin = Math.ceil(gridDirectionRange * gosperLowerThreshold)
+  
+  return gRangeMin
+}
+
+const gMax = (gridDirectionRange) => {
+  const rangeMax = Math.floor(gridDirectionRange * gosperUpperThreshold)
+
+  return rangeMax
+}
+
+const getGosperRandomLocationRow = () => {
+  const min = gMin(numOfRows)
+  const max = gMax(numOfRows)
+  const randomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
+
+  return randomRowLoc
+}
+
+const getGosperRandomLocationColumn = () => {
+  const min = gMin(numOfColumns)
+  const max = gMax(numOfColumns)
+  const randomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
+
+  return randomColumnLoc
+}
+
+// FOR ALL PATTERN INSERTS EXCLUDING GOSPER GLIDER GUN
 const directionalMin = (gridDirectionRange) => {
   const rangeMin = Math.ceil(gridDirectionRange * lowerThreshold)
-  // console.log("MIN" , rangeMin)
   
   return rangeMin
 }
 
 const directionalMax = (gridDirectionRange) => {
   const rangeMax = Math.floor(gridDirectionRange * upperThreshold)
-  // console.log("Max" , rangeMax)
 
   return rangeMax
 }
@@ -121,7 +154,6 @@ const getRandomLocationRow = () => {
   const min = directionalMin(numOfRows)
   const max = directionalMax(numOfRows)
   const randomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
-  // console.log("RANDOM ROW LOCATION", randomRowLoc)
 
   return randomRowLoc
 }
@@ -130,11 +162,11 @@ const getRandomLocationColumn = () => {
   const min = directionalMin(numOfColumns)
   const max = directionalMax(numOfColumns)
   const randomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
-  // console.log("RANDOM COLUMN LOCATION", randomColumnLoc)
 
   return randomColumnLoc
 }
 
+//Grid Generation function
 const generateEmptyGrid = () => {
   const rows = []
     for (let i = 0; i < numOfRows; i++) {
@@ -165,10 +197,8 @@ function Grid() {
     setSpeed(6)
   }
 
-
   //GENERAL INSERT FUNCTION
   const insertPattern = (displacementCoordinates) => {
-    // setGrid(generateEmptyGrid)
     setGrid( g => {
       return produce(g, gridCopy => {
         const r = getRandomLocationRow()
@@ -184,6 +214,25 @@ function Grid() {
       setSpeed(5)
     }
   }
+
+  //GOSPER GLIDER GUN PATTERN INSERT
+  const gosperInsertPattern = (displacementCoordinates) => {
+    setGrid( g => {
+      return produce(g, gridCopy => {
+        const r = getGosperRandomLocationRow()
+        const c = getGosperRandomLocationColumn()
+        displacementCoordinates.forEach(([x, y]) => {
+          const newR = r + x
+          const newC = c + y
+          gridCopy[newR][newC] = 1
+        })
+      })
+    })
+    if (speedRef.current !==6 && speedRef.current !==4){
+      setSpeed(5)
+    }
+  }
+
 
   // PRESET PATTERNS INSERT HANDLERS
   const handleToadInsert = () => {
@@ -230,13 +279,18 @@ function Grid() {
     insertPattern(MWSSCoordinates)
   }
 
+  const handleGosperInsert = () => {
+    gosperInsertPattern(gosperGliderGunCoordinates)
+  }
+  //
+
+  //Refs used to assess speed and running status on each simulation iteration
   const runningRef = useRef(isSimulationRunning)
   runningRef.current = isSimulationRunning
 
   const speedRef = useRef(speed)
   speedRef.current = speed
-
-  // console.log(grid)
+  
 
 
   //SIMULATION LOGIC
@@ -277,11 +331,11 @@ function Grid() {
       setTimeout(runSimulation, 10)
     }
   }, [])
+  //
 
 
   return (
     <>
-    
     <div className="contentSection">
       <div className="Grid" 
           style={{
@@ -414,13 +468,10 @@ function Grid() {
             <Button className={classes.insert} onClick={handleGliderInsert}>Glider</Button>
             <Button className={classes.insert} onClick={handleLWSSInsert}>Light Weight Ship</Button>
             <Button className={classes.insert} onClick={handleMWSSInsert}>Middle Weigtht Ship</Button>
-            {/* <Button className={classes.insert} onClick={handleHWSSInsert}>Heavy Spaceship</Button>         */}
+            <Button className={classes.insert} onClick={handleGosperInsert}>Gosper Glider</Button>        
           </ButtonGroup>
         </div>
       </div>
-
-      
-    
     </div>
     
   </>
