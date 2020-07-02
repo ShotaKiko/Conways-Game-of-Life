@@ -28,6 +28,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.Grid:hover {
+  cursor: pointer;
+}
+
 .contentSection {
   /* border:1px dashed pink; */
   width: 100%;
@@ -38,7 +43,7 @@
 
 .buttonInputSection {
   /* border:1px dashed red; */
-  width: 60%;
+  width: 65%;
   display: flex;
   justify-content: space-between;
   align-items: center
@@ -53,10 +58,10 @@ h5:hover {
 }
 
 .insertSection {
+  /* border: 2px solid white; */
   display: flex;
- justify-content: space-evenly;
- /* border: 2px solid white; */
- width: 40%;
+  justify-content: space-between;
+  width: 45%;
 }
 
 .sonicIcon:hover {

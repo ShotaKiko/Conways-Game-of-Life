@@ -34,7 +34,7 @@ return(
                 </div>
                 
                 <div className="quad 2">
-                    <h5>Urban Development</h5>
+                    <h5>Modeling Urban Development</h5>
                     <img className="gridImage" src={UrbanDevelopmentModel} 
                         alt="Urban development simulation model"
                     />

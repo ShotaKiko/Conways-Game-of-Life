@@ -60,8 +60,8 @@ const useStyles = makeStyles({
   insert:{
       color: unactiveButtonFontColor,
       backgroundColor:unactiveButtonColor,
-      padding:"5px",
-      fontSize:".7rem",
+      padding:"7px",
+      fontSize:".8rem",
       // borderRadius:"3px",
       '&:hover': {
           color: activeButtonFontColor,
@@ -183,7 +183,7 @@ function Grid() {
   const classes = useStyles()
   
   const [isSimulationRunning, setSimulationRunning] = useState(false)
-  const [speed, setSpeed] = useState(2)
+  const [speed, setSpeed] = useState(5)
 
   //SPEED HANDLERS
   const handleSpeedChange = (e, newSpeed) => {
@@ -346,22 +346,21 @@ function Grid() {
           >
         {grid.map((rows, rowIndex) => 
           rows.map((col, colIndex) => (
-          <div key={`${rowIndex} - ${colIndex}`} 
+          <div className="cell" key={`${rowIndex} - ${colIndex}`} 
               onClick={() => {
                   const newGrid = produce(grid, gridCopy =>{
                       //if grid at this index is alive kill it, if dead set to alive
                       gridCopy[rowIndex][colIndex] = grid[rowIndex][colIndex] ? 0 : 1
                   })
                   setGrid(newGrid)
-                  // console.log(newGrid)
               }}
             style={{ 
               width: "10px", 
               height: "10px", 
               backgroundColor: grid[rowIndex][colIndex] ? "#b1f1fa" : undefined,
               border: ".5px solid grey",
-              borderRadius:"2px"
-            }} 
+              borderRadius:"2px",
+            }}
             />
           ))
         )}
