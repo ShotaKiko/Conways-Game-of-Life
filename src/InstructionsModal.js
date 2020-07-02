@@ -7,10 +7,34 @@ import GameInfo from './modalComponents/GameInfo.js'
 import GameUtility from './modalComponents/GameUtility.js'
 import GameHowTo from './modalComponents/GameHowTo.js'
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const unactiveButtonColor = "steelBlue"
+const unactiveButtonFontColor = "#b1f1fa"
+
+const activeButtonColor = "#b1f1fa"
+const activeButtonFontColor = "steelBlue"
+
+const useStyles = makeStyles({
+  booton:{
+      color: unactiveButtonFontColor,
+      backgroundColor:unactiveButtonColor,
+      padding:"7px",
+      fontSize:".9rem",
+      // borderRadius:"3px",
+      '&:hover': {
+          color: activeButtonFontColor,
+          backgroundColor: activeButtonColor
+      }
+  },
+})
+
+
+
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   return (
     <div>
-      <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button>
+      {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
       <AutoRotatingCarousel
         label="Get started"
         open={handleOpen.open}
@@ -47,14 +71,15 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
 };
 
 function InstructionsModal() {
-  const [handleOpen, setHandleOpen] = useState({ open: false });
+  const [handleOpen, setHandleOpen] = useState({ open: true });
   const handleClick = () => {
     setHandleOpen({ open: true });
   };
   const matches = useMediaQuery("(max-width:600px)");
+  const classes = useStyles()
   return (
     <>
-      <Button onClick={handleClick}>Open caroudvdvdvsel</Button>
+      <Button className ={classes.booton} onClick={handleClick}>View Instructions</Button>
       <AutoRotatingCarouselModal
         isMobile={matches}
         handleOpen={handleOpen}

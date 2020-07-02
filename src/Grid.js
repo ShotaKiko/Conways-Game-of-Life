@@ -25,6 +25,7 @@ import gliderCoordinates from './displacementCoordibates/gliderCoordinates.js'
 import LWSSCoordinates from './displacementCoordibates/LWSSCoordinates.js'
 import MWSSCoordinates from './displacementCoordibates/MWSSCoordinates.js'
 import gosperGliderGunCoordinates from './displacementCoordibates/gosperGliderGunCoordinates.js'
+import InstructionsModal from './InstructionsModal';
 
 const unactiveButtonColor = "steelBlue"
 const unactiveButtonFontColor = "#b1f1fa"
@@ -50,7 +51,7 @@ const useStyles = makeStyles({
       backgroundColor:unactiveButtonColor,
       padding:"7px",
       fontSize:".9rem",
-      // borderRadius:"3px",
+      borderRadius:"3px",
       '&:hover': {
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
@@ -399,6 +400,9 @@ function Grid() {
           >
             Randomize Grid
           </Button>
+
+          
+          <InstructionsModal />
         </ButtonGroup>
       </div>
       
