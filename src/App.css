@@ -16,6 +16,8 @@
   font-family: "Roboto";
 }
 
+
+/* Grid Section Styling */
 .gridContainer {
   /* border: 1px solid white; */
   background-color: #181E28 ;
@@ -35,7 +37,7 @@
 }
 
 .buttonInputSection {
-  border:1px dashed red;
+  /* border:1px dashed red; */
   width: 60%;
   display: flex;
   justify-content: space-between;
@@ -94,6 +96,47 @@ h5:hover {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+/*Instruction Modal Section Styling */
+.aboutModal {
+  /* border: 1px solid whitesmoke; */
+  font-family: Roboto;
+  height: 82%;
+} 
+
+.title {
+  color: whitesmoke;
+}
+
+.aboutDiv {
+  /* border:1px solid green; */
+  width: 85%;
+  margin:0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: whitesmoke;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.conwayImage {
+  border-radius: 7px;
+  height: 200px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 
+  0 3px 6px rgba(0,0,0,0.23);
+}
+
+.aboutText {
+  /* border: 1px solid white; */
+  font-size: .9rem;
+  text-align: left;
+  width: 60%;
+}
+
+
+
+
+/* Footer Section Styling */
 .copyright {
   color: #b1f1fa;
   margin-top: 2vh;
