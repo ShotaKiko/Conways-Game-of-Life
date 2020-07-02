@@ -133,6 +133,36 @@ h5:hover {
   width: 60%;
 }
 
+.utilityModal {
+  /* border: 1px solid whitesmoke; */
+  font-family: Roboto;
+  height: 95%;
+} 
+
+.utilityText {
+  /* border:1px solid red; */
+  color: whitesmoke;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.quadGrid {
+  /* border: 2px solid orange; */
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.quad {
+  /* border: 1px solid black; */
+  width: 32%;
+}
+
+
+.gridImage {
+  height: 150px;
+  border-radius: 6px;
+}
 
 
 

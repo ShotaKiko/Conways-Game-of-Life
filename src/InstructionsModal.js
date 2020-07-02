@@ -4,6 +4,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { lightBlue, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import GameInfo from './modalComponents/GameInfo.js'
+import GameUtility from './modalComponents/GameUtility.js'
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   return (
@@ -19,23 +20,18 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
         style={{ position: "absolute" }}
       >
         <Slide
-          media={
-            <GameInfo />
-          }
-          mediaBackgroundStyle={{ backgroundColor: blue[800] }}
-          style={{ backgroundColor: blue[900] }}
+          media={ <GameInfo /> }
+          mediaBackgroundStyle={{ backgroundColor: lightBlue[800] }}
+          style={{ backgroundColor: lightBlue[900] }}
           title="John Conway's Game of Life"
           subtitle={`A turing complete, zero player, cellular automaton`}
         />
         <Slide
-          media={
-            <div>hi there</div>
-            
-          }
-          mediaBackgroundStyle={{ backgroundColor: lightBlue[400] }}
-          style={{ backgroundColor: lightBlue[600] }}
-          title="Ever wanted to be popular?"
-          subtitle="Well just mix two colors and your are good to go!"
+          media={ <GameUtility /> }
+          mediaBackgroundStyle={{ backgroundColor: lightBlue[700] }}
+          style={{ backgroundColor: lightBlue[800] }}
+          title="Modeling physical and biological systems"
+          subtitle="Proceed to instructions -->"
         />
         <Slide
           media={
