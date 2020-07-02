@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { lightBlue, blue, green } from "@material-ui/core/colors";
+import { lightBlue, blueGrey } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import GameInfo from './modalComponents/GameInfo.js'
 import GameUtility from './modalComponents/GameUtility.js'
+import GameHowTo from './modalComponents/GameHowTo.js'
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   return (
@@ -28,19 +29,17 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
         />
         <Slide
           media={ <GameUtility /> }
-          mediaBackgroundStyle={{ backgroundColor: lightBlue[700] }}
-          style={{ backgroundColor: lightBlue[800] }}
+          mediaBackgroundStyle={{ backgroundColor: blueGrey[700] }}
+          style={{ backgroundColor: blueGrey[900] }}
           title="Modeling physical and biological systems"
-          subtitle="Proceed to instructions -->"
+          subtitle=" ┬─┬ノ( º _ ºノ) Please proceed to game instructions! ---->"
         />
         <Slide
-          media={
-            <div>hello a third time</div>
-          }
-          mediaBackgroundStyle={{ backgroundColor: green[400] }}
-          style={{ backgroundColor: green[600] }}
-          title="May the force be with you"
-          subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+          media={ <GameHowTo /> }
+          mediaBackgroundStyle={{ backgroundColor: blueGrey[500] }}
+          style={{ backgroundColor: blueGrey[700] }}
+          title="App Instructions"
+          subtitle="No more tutorials (┛ಠ_ಠ)┛彡┻━┻ Have fun!!" 
         />
       </AutoRotatingCarousel>
     </div>

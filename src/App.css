@@ -164,6 +164,44 @@ h5:hover {
   border-radius: 6px;
 }
 
+.HowModal {
+  /* border:2px solid red; */
+  height: 95%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.HowDiv {
+  /* border: 1px solid purple; */
+  width: 100%;
+  margin: 0 auto;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+.step {
+  /* border: 1px solid green; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stepImg {
+  border-radius: 6px;
+  height: 105px;
+}
+
+.stepImgBig {
+  border-radius: 6px;
+  height: 70px;
+}
+
 
 
 /* Footer Section Styling */
