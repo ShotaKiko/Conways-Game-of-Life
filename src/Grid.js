@@ -9,6 +9,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import SpeedGrid from '@material-ui/core/Grid';
+import useWindowDimensions from './useWindowDimensions.js'
 
 
 //Coordinate Imports
@@ -97,6 +98,8 @@ const SpeedSlider = withStyles({
   },
 })(Slider);
 
+
+
 //MODIFIABLE TO CHANGE GRID SIZE
 const numOfRows= 35
 const numOfColumns = 90
@@ -167,20 +170,28 @@ const getRandomLocationColumn = () => {
   return randomColumnLoc
 }
 
-//Grid Generation function
-const generateEmptyGrid = () => {
-  const rows = []
-    for (let i = 0; i < numOfRows; i++) {
-      rows.push(Array.from(Array(numOfColumns), () => 0))
-    }
-    return rows
-}
-
 function Grid() {
+  //applies styles to material ui components
+  const classes = useStyles()
+  
+  //to be used to calculate grid size depending on window dimensions
+  const { height, width } = useWindowDimensions()
+  console.log("HEIGHT", height)
+  console.log("WIDTH", width)
+  
+  //Grid Generation function
+  const generateEmptyGrid = () => {
+    const rows = []
+      for (let i = 0; i < numOfRows; i++) {
+        rows.push(Array.from(Array(numOfColumns), () => 0))
+      }
+      return rows
+  }
+  
   const [grid, setGrid] = useState(() => {
     return generateEmptyGrid()
   })
-  const classes = useStyles()
+  
   
   const [isSimulationRunning, setSimulationRunning] = useState(false)
   const [speed, setSpeed] = useState(5)
