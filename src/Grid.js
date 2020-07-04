@@ -99,10 +99,10 @@ const SpeedSlider = withStyles({
 })(Slider);
 
 
-
+console.log("WINDOW", window.innerWidth)
 //MODIFIABLE TO CHANGE GRID SIZE
-const numOfRows= 35
-const numOfColumns = 90
+let numOfRows= 40
+let numOfColumns = 100
 
 //These vars affect random point of pattern insert
 const lowerThreshold = .15
@@ -174,10 +174,23 @@ function Grid() {
   //applies styles to material ui components
   const classes = useStyles()
   
+  
   //to be used to calculate grid size depending on window dimensions
   const { height, width } = useWindowDimensions()
-  console.log("HEIGHT", height)
-  console.log("WIDTH", width)
+  // console.log("HEIGHT", height)
+  // console.log("WIDTH", width)
+  
+  if (width < 1450) {
+    numOfColumns = 85
+  } else if (width < 1025){
+    numOfColumns = 20
+  } else if (width < 600) {
+    numOfColumns = 15
+    numOfRows = 10
+  } else if (width > 1925 && height > 1085 ) {
+    numOfColumns = 200
+    numOfRows = 60
+  }
   
   //Grid Generation function
   const generateEmptyGrid = () => {
