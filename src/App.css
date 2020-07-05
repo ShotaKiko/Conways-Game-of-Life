@@ -64,6 +64,23 @@ h5:hover {
   width: 45%;
 }
 
+/* Styling for laptop and similar sizes */
+@media screen and (max-width: 1445px){
+  .insertSection{
+    width: 50%;
+    margin-left: 1vw;
+  }
+
+  .buttonInputSection{
+    width: 80%;
+  } 
+
+  .controls {
+    /* border: 1px solid red; */
+    width: 20%;
+  }
+}
+
 .sonicIcon:hover {
   animation: shake 0.5s;
   animation-iteration-count: infinite;

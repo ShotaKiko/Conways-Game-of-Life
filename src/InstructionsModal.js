@@ -15,7 +15,7 @@ const unactiveButtonFontColor = "#b1f1fa"
 const activeButtonColor = "#b1f1fa"
 const activeButtonFontColor = "steelBlue"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=> ({
   booton:{
       color: unactiveButtonFontColor,
       backgroundColor:unactiveButtonColor,
@@ -25,9 +25,12 @@ const useStyles = makeStyles({
       '&:hover': {
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
-      }
+      },
+      [theme.breakpoints.between('xs', 'lg')]: {
+        fontSize:".8rem"
+      },
   },
-})
+}))
 
 
 

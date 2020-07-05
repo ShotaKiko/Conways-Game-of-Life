@@ -35,7 +35,7 @@ const activeButtonColor = "#b1f1fa"
 const activeButtonFontColor = "steelBlue"
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root:{
     // border:"1px solid pink",
     width:"400px",
@@ -56,7 +56,10 @@ const useStyles = makeStyles({
       '&:hover': {
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
-      }
+      },
+      [theme.breakpoints.between('xs', 'lg')]: {
+        fontSize:".8rem"
+      },
   },
   insert:{
       color: unactiveButtonFontColor,
@@ -69,7 +72,7 @@ const useStyles = makeStyles({
           backgroundColor: activeButtonColor
       }
   }
-})
+}))
 
 const SpeedSlider = withStyles({
   root: {
