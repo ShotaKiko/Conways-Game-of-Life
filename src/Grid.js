@@ -183,16 +183,21 @@ function Grid() {
   // console.log("HEIGHT", height)
   // console.log("WIDTH", width)
   
-  if (width < 1450) {
+  if (width < 1450  && width >= 1025) {
     numOfColumns = 85
-  } else if (width < 1025){
+  } else if (width < 1025 && width >= 600){
     numOfColumns = 20
   } else if (width < 600) {
-    numOfColumns = 15
-    numOfRows = 10
+    numOfColumns = 30
+    numOfRows = 30
+    console.log("Detect reached")
   } else if (width > 1925 && height > 1085 ) {
     numOfColumns = 200
     numOfRows = 60
+  }
+
+  if(width < 800) {
+    console.log("MOBILE DIMENSIONS DETECTED")
   }
   
   //Grid Generation function
