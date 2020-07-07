@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
   },
   slider:{
     width:"210px",
+    [theme.breakpoints.down('xs')]: {
+      width:"130px",
+    },
     // border:"1px solid white"
   },
   booton:{
@@ -57,8 +60,11 @@ const useStyles = makeStyles((theme) => ({
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
       },
-      [theme.breakpoints.between('xs', 'lg')]: {
+      [theme.breakpoints.between('sm', 'lg')]: {
         fontSize:".8rem"
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize:".6rem"
       },
   },
   insert:{
@@ -70,7 +76,10 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
-      }
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize:".6rem"
+      },
   }
 }))
 
@@ -102,7 +111,7 @@ const SpeedSlider = withStyles({
 })(Slider);
 
 
-console.log("WINDOW", window.innerWidth)
+// console.log("WINDOW", window.innerWidth)
 //MODIFIABLE TO CHANGE GRID SIZE
 let numOfRows= 40
 let numOfColumns = 100
@@ -176,6 +185,7 @@ const getRandomLocationColumn = () => {
 function Grid() {
   //applies styles to material ui components
   const classes = useStyles()
+  let mobileVersion = false
   
   
   //to be used to calculate grid size depending on window dimensions
@@ -190,14 +200,15 @@ function Grid() {
   } else if (width < 600) {
     numOfColumns = 30
     numOfRows = 30
-    console.log("Detect reached")
+    mobileVersion = true
+    // console.log("Detect reached")
   } else if (width > 1925 && height > 1085 ) {
     numOfColumns = 200
     numOfRows = 60
   }
 
   if(width < 800) {
-    console.log("MOBILE DIMENSIONS DETECTED")
+    // console.log("MOBILE DIMENSIONS DETECTED")
   }
   
   //Grid Generation function
@@ -403,7 +414,7 @@ function Grid() {
       <div className="controls">
         <h5>Controls</h5>
         {/* if sim is running we will display stop otherwise start if sim is not running */}
-        <ButtonGroup  orientation="vertical">
+        <ButtonGroup  orientation={mobileVersion ? "horizontal" : "vertical"}>
           <Button className={classes.booton} onClick={() => {
               setSimulationRunning(!isSimulationRunning)
               if (!isSimulationRunning) {
@@ -479,7 +490,7 @@ function Grid() {
 
         <div className="oscillatorsDiv">
           <h5>Oscillators</h5>
-          <ButtonGroup orientation="vertical" >
+          <ButtonGroup orientation={mobileVersion ? "horizontal" : "vertical"} >
             <Button className={classes.insert} onClick={handleToadInsert}>Toad</Button>
             <Button className={classes.insert} onClick={handleBeaconInsert}>Beacon</Button>
             <Button className={classes.insert} onClick={handlePentadecathalonInsert}>Pentadecathalon</Button>
@@ -489,7 +500,7 @@ function Grid() {
 
         <div className="staticDiv">
           <h5>Still Life</h5>
-          <ButtonGroup orientation="vertical" >
+          <ButtonGroup orientation={mobileVersion ? "horizontal" : "vertical"} >
             <Button className={classes.insert} onClick={handleLoafInsert}>Loaf</Button>
             <Button className={classes.insert} onClick={handleHiveInsert}>Bee-Hive</Button>
             <Button className={classes.insert} onClick={handleBoatInsert}>Boat</Button>
@@ -499,7 +510,7 @@ function Grid() {
 
         <div className="spaceshipDiv">
           <h5>Space Ships</h5>
-          <ButtonGroup orientation="vertical" >
+          <ButtonGroup orientation={mobileVersion ? "horizontal" : "vertical"} >
             <Button className={classes.insert} onClick={handleGliderInsert}>Glider</Button>
             <Button className={classes.insert} onClick={handleLWSSInsert}>Light Weight Ship</Button>
             <Button className={classes.insert} onClick={handleMWSSInsert}>Middle Weigtht Ship</Button>
