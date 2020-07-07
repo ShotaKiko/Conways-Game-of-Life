@@ -26,8 +26,11 @@ const useStyles = makeStyles((theme)=> ({
           color: activeButtonFontColor,
           backgroundColor: activeButtonColor
       },
-      [theme.breakpoints.between('xs', 'lg')]: {
+      [theme.breakpoints.between('sm', 'lg')]: {
         fontSize:".8rem"
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize:".6rem"
       },
   },
 }))

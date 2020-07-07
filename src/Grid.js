@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     alignItems:"center",
     justifyContent:"center",
+    [theme.breakpoints.down('xs')]: {
+      marginTop:"3vh",
+    },
   },
   slider:{
     width:"210px",
