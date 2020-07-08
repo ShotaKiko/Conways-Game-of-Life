@@ -253,6 +253,32 @@ h5:hover {
   }
 }
 
+/*Styling for tablet similar sizes */
+@media screen and (max-width: 1090px){
+  .buttonInputSection {
+    /* border: 2px solid white; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .controls {
+    /* border: 2px solid green; */
+    width: 50%;
+  }
+
+  .insertSection{
+    border: 2px solid red;
+    width: 75%;
+  }
+
+  .sliderDiv {
+    border: 2px solid indigo;
+    margin-top: 5vh;
+  }
+
+}
+
 /*Styling for mobile similar sizes */
 @media screen and (max-width: 760px){
   .controls{
@@ -262,7 +288,6 @@ h5:hover {
   
   .buttonInputSection{
     flex-wrap: wrap;
-    
   }
 
   .insertSection{
@@ -275,6 +300,11 @@ h5:hover {
 
   h5{
     width: 100%;
+  }
+
+  .sliderDiv {
+    border: 2px solid indigo;
+    margin-top: 0vh;
   }
 
 }

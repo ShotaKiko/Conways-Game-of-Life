@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   slider:{
+    // border: "2px solid orange",
     width:"210px",
     [theme.breakpoints.down('xs')]: {
       width:"130px",
     },
-    // border:"1px solid white"
   },
   booton:{
       color: unactiveButtonFontColor,
@@ -139,9 +139,9 @@ function Grid() {
   // console.log("HEIGHT", height)
   // console.log("WIDTH", width)
   
-  if (width < 1450  && width >= 1025) {
+  if (width < 1450  && width >= 1090) {
     numOfColumns = 85
-  } else if (width < 1025 && width >= 600){
+  } else if (width < 1090 && width >= 600){
     numOfColumns = 60
     tabletVersion = true
   } else if (width < 600) {
@@ -419,7 +419,7 @@ function Grid() {
       <div className="controls">
         <h5>Controls</h5>
         {/* if sim is running we will display stop otherwise start if sim is not running */}
-        <ButtonGroup  orientation={mobileVersion ? "horizontal" : "vertical"}>
+        <ButtonGroup  orientation={tabletVersion ? "horizontal" : "vertical"}>
           <Button className={classes.booton} onClick={() => {
               setSimulationRunning(!isSimulationRunning)
               if (!isSimulationRunning) {
@@ -453,44 +453,46 @@ function Grid() {
         </ButtonGroup>
       </div>
       
-      <SpeedGrid className={classes.root} container spacing={2}>
-        <SpeedGrid item>
-          <img 
-            className={speedRef.current === 1 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
-            src={Snorlax} 
-            alt="Slow like Snorlax"
-            onClick={()=> {
-              handleSlowest()
-            }} 
-          />
+      <div className="sliderDiv">
+        <SpeedGrid className={classes.root} container spacing={2}>
+          <SpeedGrid item>
+            <img 
+              className={speedRef.current === 1 ? "activatedSnorlaxIcon" : "snorlaxIcon"} 
+              src={Snorlax} 
+              alt="Slow like Snorlax"
+              onClick={()=> {
+                handleSlowest()
+              }} 
+            />
+          </SpeedGrid>
+          <SpeedGrid>
+            <SpeedSlider
+              className={classes.slider}
+              defaultValue={speed}
+              value={speedRef.current}
+              aria-labelledby="discrete-slider"
+              // aria-labelledby="continuous-slider"
+              // valueLabelDisplay="auto"
+              step={1}
+              marks
+              min={1}
+              max={6}
+              onChange={handleSpeedChange}
+            />
+          </SpeedGrid>
+          <SpeedGrid item>
+            <img 
+              className={speedRef.current === 6 ? "activatedSonicIcon" : "sonicIcon"} 
+              src={Sonic} 
+              alt="Fast like Sonic"
+              onClick={()=> {
+                handleFastest()
+              }}  
+            />
+          </SpeedGrid>
         </SpeedGrid>
-        <SpeedGrid>
-          <SpeedSlider
-            className={classes.slider}
-            defaultValue={speed}
-            value={speedRef.current}
-            aria-labelledby="discrete-slider"
-            // aria-labelledby="continuous-slider"
-            // valueLabelDisplay="auto"
-            step={1}
-            marks
-            min={1}
-            max={6}
-            onChange={handleSpeedChange}
-          />
-        </SpeedGrid>
-        <SpeedGrid item>
-          <img 
-            className={speedRef.current === 6 ? "activatedSonicIcon" : "sonicIcon"} 
-            src={Sonic} 
-            alt="Fast like Sonic"
-            onClick={()=> {
-              handleFastest()
-            }}  
-          />
-        </SpeedGrid>
-      </SpeedGrid>
-      
+      </div>
+
       <div className="insertSection">
 
         <div className="oscillatorsDiv">
