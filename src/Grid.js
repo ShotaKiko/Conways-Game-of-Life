@@ -126,71 +126,14 @@ const upperThreshold = .85
 const gosperLowerThreshold = .35
 const gosperUpperThreshold = .65
 
-//selects more centered coordinate for gosper glider pattern
-const gMin = (gridDirectionRange) => {
-  const gRangeMin = Math.ceil(gridDirectionRange * gosperLowerThreshold)
-  
-  return gRangeMin
-}
 
-const gMax = (gridDirectionRange) => {
-  const rangeMax = Math.floor(gridDirectionRange * gosperUpperThreshold)
-
-  return rangeMax
-}
-
-const getGosperRandomLocationRow = () => {
-  const min = gMin(numOfRows)
-  const max = gMax(numOfRows)
-  const randomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
-
-  return randomRowLoc
-}
-
-const getGosperRandomLocationColumn = () => {
-  const min = gMin(numOfColumns)
-  const max = gMax(numOfColumns)
-  const randomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
-
-  return randomColumnLoc
-}
-
-// FOR ALL PATTERN INSERTS EXCLUDING GOSPER GLIDER GUN
-const directionalMin = (gridDirectionRange) => {
-  const rangeMin = Math.ceil(gridDirectionRange * lowerThreshold)
-  
-  return rangeMin
-}
-
-const directionalMax = (gridDirectionRange) => {
-  const rangeMax = Math.floor(gridDirectionRange * upperThreshold)
-
-  return rangeMax
-}
-
-//gets a random row & col locations based on grid size and thresholds established above
-const getRandomLocationRow = () => {
-  const min = directionalMin(numOfRows)
-  const max = directionalMax(numOfRows)
-  const randomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
-
-  return randomRowLoc
-}
-
-const getRandomLocationColumn = () => {
-  const min = directionalMin(numOfColumns)
-  const max = directionalMax(numOfColumns)
-  const randomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
-
-  return randomColumnLoc
-}
 
 function Grid() {
   //applies styles to material ui components
   const classes = useStyles()
   let mobileVersion = false
-  
-  
+  let tabletVersion = false
+
   //to be used to calculate grid size depending on window dimensions
   const { height, width } = useWindowDimensions()
   // console.log("HEIGHT", height)
@@ -199,9 +142,10 @@ function Grid() {
   if (width < 1450  && width >= 1025) {
     numOfColumns = 85
   } else if (width < 1025 && width >= 600){
-    numOfColumns = 20
+    numOfColumns = 60
+    tabletVersion = true
   } else if (width < 600) {
-    numOfColumns = 30
+    numOfColumns = 35
     numOfRows = 30
     mobileVersion = true
     // console.log("Detect reached")
@@ -210,9 +154,67 @@ function Grid() {
     numOfRows = 60
   }
 
-  if(width < 800) {
-    // console.log("MOBILE DIMENSIONS DETECTED")
+  //selects more centered coordinate for gosper glider pattern
+  const gMin = (gridDirectionRange) => {
+    const gRangeMin = Math.ceil(gridDirectionRange * gosperLowerThreshold)
+    
+    return gRangeMin
   }
+
+  const gMax = (gridDirectionRange) => {
+    const gRangeMax = Math.floor(gridDirectionRange * gosperUpperThreshold)
+
+    return gRangeMax
+  }
+
+  const getGosperRandomLocationRow = () => {
+    const min = gMin(numOfRows)
+    const max = gMax(numOfRows)
+    const grandomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
+
+    return grandomRowLoc
+  }
+
+  const getGosperRandomLocationColumn = () => {
+    const min = gMin(numOfColumns)
+    const max = gMax(numOfColumns)
+    const grandomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
+
+    return grandomColumnLoc
+  }
+
+  // FOR ALL PATTERN INSERTS EXCLUDING GOSPER GLIDER GUN
+  const directionalMin = (gridDirectionRange) => {
+    const rangeMin = Math.ceil(gridDirectionRange * lowerThreshold)
+    
+    return rangeMin
+  }
+
+  const directionalMax = (gridDirectionRange) => {
+    const rangeMax = Math.floor(gridDirectionRange * upperThreshold)
+
+    return rangeMax
+  }
+
+  //gets a random row & col locations based on grid size and thresholds established above
+  const getRandomLocationRow = () => {
+    const min = directionalMin(numOfRows)
+    const max = directionalMax(numOfRows)
+    const randomRowLoc = (Math.floor(Math.random() * (max - min)) + min)
+
+    return randomRowLoc
+  }
+
+  const getRandomLocationColumn = () => {
+    const min = directionalMin(numOfColumns)
+    const max = directionalMax(numOfColumns)
+    const randomColumnLoc = (Math.floor(Math.random() * (max - min)) + min)
+
+    return randomColumnLoc
+  }
+  
+  
+  
   
   //Grid Generation function
   const generateEmptyGrid = () => {
