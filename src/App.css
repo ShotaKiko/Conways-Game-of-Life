@@ -268,12 +268,12 @@ h5:hover {
   }
 
   .insertSection{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 75%;
   }
 
   .sliderDiv {
-    border: 2px solid indigo;
+    /* border: 2px solid indigo; */
     margin-top: 5vh;
   }
 
@@ -282,7 +282,7 @@ h5:hover {
 /*Styling for mobile similar sizes */
 @media screen and (max-width: 760px){
   .controls{
-    border: 1px solid white;
+    /* border: 1px solid white; */
     width: 100%;
   }
   
@@ -303,7 +303,7 @@ h5:hover {
   }
 
   .sliderDiv {
-    border: 2px solid indigo;
+    /* border: 2px solid indigo; */
     margin-top: 0vh;
   }
 

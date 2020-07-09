@@ -83,7 +83,10 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.down('xs')]: {
         fontSize:".6rem"
       },
-  }
+  },
+  conditionalInsert:{
+    display:"none",
+  },
 }))
 
 const SpeedSlider = withStyles({
@@ -521,7 +524,7 @@ function Grid() {
             <Button className={classes.insert} onClick={handleGliderInsert}>Glider</Button>
             <Button className={classes.insert} onClick={handleLWSSInsert}>Light Weight Ship</Button>
             <Button className={classes.insert} onClick={handleMWSSInsert}>Middle Weigtht Ship</Button>
-            <Button className={classes.insert} onClick={handleGosperInsert}>Gosper Glider</Button>        
+            <Button className={mobileVersion ? classes.conditionalInsert : classes.insert} onClick={handleGosperInsert}>Gosper Glider</Button>        
           </ButtonGroup>
         </div>
       </div>
