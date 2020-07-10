@@ -307,4 +307,20 @@ h5:hover {
     margin-top: 0vh;
   }
 
+  .aboutDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .conwayImage {
+    max-width:50%; 
+    height:auto;
+  }
+
+  .aboutText {
+    width: 90%;
+    line-height: 1.5;
+    text-align: center;
+  }
+
 }
