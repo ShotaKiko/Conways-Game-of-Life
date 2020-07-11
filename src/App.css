@@ -323,4 +323,29 @@ h5:hover {
     text-align: center;
   }
 
+  .utilityText {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .quadGrid {
+    /* border: 2px solid red; */
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+  }
+
+  .quad {
+    /* border: 1px solid white; */
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gridImage {
+    height: auto;
+    max-width: 45%;
+  }
+
 }
