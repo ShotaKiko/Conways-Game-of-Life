@@ -61,7 +61,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
           media={ <GameUtility /> }
           mediaBackgroundStyle={{ backgroundColor: blueGrey[700] }}
           style={{ backgroundColor: blueGrey[900] }}
-          title="Modeling physical and biological systems"
+          title="Modeling physical systems"
           subtitle=" ┬─┬ノ( º _ ºノ) Please proceed to game instructions! ---->"
         />
         <Slide

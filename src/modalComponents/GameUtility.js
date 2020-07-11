@@ -26,8 +26,8 @@ return(
                     />
                 </div>
                 
-                <div className="quad 1">
-                    <h5>Crystal Formation</h5>
+                <div id="shift" className="quad 1">
+                    <h5 className="mobileLocationHeader">Crystal Formation</h5>
                     <img className="gridImage" src={CrystalModel} 
                         alt="crystal formation simulation"
                     />

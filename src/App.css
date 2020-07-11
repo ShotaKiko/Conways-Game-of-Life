@@ -338,14 +338,28 @@ h5:hover {
   .quad {
     /* border: 1px solid white; */
     display: flex;
-    width: 90%;
+    width: 95%;
     align-items: center;
     justify-content: center;
   }
 
   .gridImage {
     height: auto;
-    max-width: 45%;
+    max-width: 40%;
+    order: 1;
+  }
+  
+  h5 {    
+    margin-right: 15vw;
+  }
+  
+  div#shift {
+    /* border: 1px solid red; */
+    flex-direction: row-reverse;
   }
 
+  .mobileLocationHeader {
+    margin-right: 0vw;
+    margin-left: 15vw;
+  }
 }
