@@ -377,3 +377,27 @@ h5:hover {
     width: 90%;
   }
 }
+
+/* Smaller than Iphone X Mobile Size */
+@media screen and (max-height: 800px) and (max-width: 400px){
+  img#hideOnMobile {
+    /* display: none; */
+    max-width: 37.5%;
+    height: auto;
+  }
+
+  .aboutDiv {
+    flex-direction: column-reverse;
+  }
+
+  .aboutText {
+    font-size: .8rem;
+  }
+}
+
+/* Smallest mobile sizes */
+@media screen and (max-width: 340px){
+  img#hideOnMobile {
+    display: none;
+  }
+}

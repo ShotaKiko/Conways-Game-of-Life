@@ -23,7 +23,7 @@ return(
                 </p>
             </div>
            
-            <img className="conwayImage" src={Conway} alt="John Horton Conway" />
+            <img id="hideOnMobile" className="conwayImage" src={Conway} alt="John Horton Conway" />
         </div>
     </div>
 )
