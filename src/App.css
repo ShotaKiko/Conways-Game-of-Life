@@ -379,7 +379,7 @@ h5:hover {
 }
 
 /* Smaller than Iphone X Mobile Size */
-@media screen and (max-height: 800px) and (max-width: 400px){
+@media screen and (max-height: 800px) and (max-width: 420px){
   img#hideOnMobile {
     /* display: none; */
     max-width: 37.5%;
@@ -405,12 +405,31 @@ h5:hover {
   .quadGrid h5{
     font-size: .9rem;
   }
+
+  .HowModal {
+    margin-bottom: 10vh;
+  }
+
+  .stepImg {
+    max-width: 55%;
+    height: auto;
+  }
+
+  .stepImgBig {
+    max-width: 50%;
+    height: auto;
+  }
 }
 
 /* Smallest mobile sizes */
 @media screen and (max-width: 340px){
   img#hideOnMobile {
-    display: none;
+   max-width: 30%;
+   height: auto;
+  }
+
+  .aboutModal {
+    margin-bottom: 10vh;
   }
 
   .quadGrid h5{
@@ -419,5 +438,19 @@ h5:hover {
 
   div#shift {
     margin-bottom: 10vh;
+  }
+
+  .stepImg {
+    max-width: 65%;
+    height: auto;
+  }
+
+  img#theBird {
+    max-width: 40%;
+    height: auto;
+  }
+
+  .HowDiv p {
+    font-size: .8rem;
   }
 }

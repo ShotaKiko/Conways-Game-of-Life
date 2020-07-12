@@ -12,7 +12,7 @@ return(
         <div className="HowDiv">
             <div id="shiftHow" className="step 1">
                 <p>Activate some cells before starting the simulation</p>
-                <img className="stepImg" src={StartingInput}
+                <img id="theBird" className="stepImg" src={StartingInput}
                     alt="Be sure to activate a few adjacent cells before
                     starting the simulation"
                 />
