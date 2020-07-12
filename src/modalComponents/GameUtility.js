@@ -33,7 +33,7 @@ return(
                     />
                 </div>
                 
-                <div className="quad 2">
+                <div id="hideOnMobile" className="quad 2">
                     <h5>Modeling Urban Development</h5>
                     <img className="gridImage" src={UrbanDevelopmentModel} 
                         alt="Urban development simulation model"

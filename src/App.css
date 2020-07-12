@@ -393,11 +393,31 @@ h5:hover {
   .aboutText {
     font-size: .8rem;
   }
+
+  div#hideOnMobile {
+    display: none;
+  }
+
+  .utilityText {
+    font-size: .8rem;
+  }
+
+  .quadGrid h5{
+    font-size: .9rem;
+  }
 }
 
 /* Smallest mobile sizes */
 @media screen and (max-width: 340px){
   img#hideOnMobile {
     display: none;
+  }
+
+  .quadGrid h5{
+    font-size: .8rem;
+  }
+
+  div#shift {
+    margin-bottom: 10vh;
   }
 }
