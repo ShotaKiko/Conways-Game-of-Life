@@ -10,7 +10,7 @@ return(
             How To
         </h3>
         <div className="HowDiv">
-            <div className="step 1">
+            <div id="shiftHow" className="step 1">
                 <p>Activate some cells before starting the simulation</p>
                 <img className="stepImg" src={StartingInput}
                     alt="Be sure to activate a few adjacent cells before
@@ -25,7 +25,7 @@ return(
                 <p>Use the slider to adjust the simulation speed</p>
             </div>
             
-            <div className="step 3">
+            <div id="shiftHow" className="step 3">
                 <p>
                     Use the pattern presets to populate the grid!
                 </p>

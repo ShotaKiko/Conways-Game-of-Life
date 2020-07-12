@@ -362,4 +362,18 @@ h5:hover {
     margin-right: 0vw;
     margin-left: 15vw;
   }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+  }
+
+  div#shiftHow {
+    /* border: 1px solid red; */
+    flex-direction: column-reverse;
+  }
+
+  .HowDiv p {
+    width: 90%;
+  }
 }
