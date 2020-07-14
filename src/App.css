@@ -421,6 +421,14 @@ h5:hover {
   }
 }
 
+/* Input Section Responsives */
+@media screen and (max-width: 600px) {
+  .insertSection {
+    flex-direction: column;
+  }
+}
+
+
 /* Smallest mobile sizes */
 @media screen and (max-width: 340px){
   img#hideOnMobile {

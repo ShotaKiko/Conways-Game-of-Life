@@ -157,6 +157,11 @@ function Grid() {
     numOfRows = 60
   }
 
+  // Reload the app when resize to adjust grid automatically
+  window.addEventListener('resize', function () { 
+    window.location.reload(); 
+  });
+
   //selects more centered coordinate for gosper glider pattern
   const gMin = (gridDirectionRange) => {
     const gRangeMin = Math.ceil(gridDirectionRange * gosperLowerThreshold)
@@ -215,9 +220,6 @@ function Grid() {
 
     return randomColumnLoc
   }
-  
-  
-  
   
   //Grid Generation function
   const generateEmptyGrid = () => {
