@@ -11,7 +11,7 @@ return(
         </h3>
         <div className="HowDiv">
             <div id="shiftHow" className="step 1">
-                <p>Activate some cells before starting the simulation</p>
+                <p className="mobileAppearance">Activate some cells before starting the simulation</p>
                 <img id="theBird" className="stepImg" src={StartingInput}
                     alt="Be sure to activate a few adjacent cells before
                     starting the simulation"

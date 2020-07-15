@@ -402,6 +402,10 @@ h5:hover {
     display: none;
   }
 
+  div#shift {
+    display: none;
+  }
+
   .utilityText {
     font-size: .8rem;
   }
@@ -410,6 +414,7 @@ h5:hover {
     /* border:1px solid white; */
     height: fit-content;
   }
+  
 
   .quadGrid h5{
     font-size: .9rem;
@@ -426,6 +431,10 @@ h5:hover {
 
   div#shiftHow {
     margin-top: 2vh;
+  }
+
+  .mobileAppearance {
+    display: none;
   }
 
   .stepImg {
