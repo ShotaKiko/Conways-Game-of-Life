@@ -386,9 +386,7 @@ h5:hover {
     display: none;
   }
 
-  div#shift {
-    display: none;
-  }
+  
 
   img#theBird {
     display: none;
@@ -410,12 +408,26 @@ h5:hover {
     font-size: .8rem;
   }
 
+  .quadGrid {
+    /* border:1px solid white; */
+    height: fit-content;
+  }
+
+  /* div#shift {
+    display: none;
+  } */
+
   .quadGrid h5{
     font-size: .9rem;
   }
 
   .HowModal {
     margin-bottom: 10vh;
+  }
+
+  .HowDiv {
+    /* border: 1px solid white; */
+    justify-content: space-evenly;
   }
 
   .stepImg {

@@ -158,9 +158,11 @@ function Grid() {
   }
 
   // Reload the app when resize to adjust grid automatically
-  window.addEventListener('resize', function () { 
-    window.location.reload(); 
-  });
+  if (!mobileVersion) {
+    window.addEventListener('resize', function () { 
+      window.location.reload(); 
+    });
+  }
 
   //selects more centered coordinate for gosper glider pattern
   const gMin = (gridDirectionRange) => {
