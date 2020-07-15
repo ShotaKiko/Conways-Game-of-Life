@@ -45,7 +45,7 @@ export default function Footer(){
         }}>
                 <div className="footerLinks">
                 
-                    <Button href="https://github.com/ShotaKiko/Burger-Builder" 
+                    <Button href="https://github.com/ShotaKiko/Conways-Game-of-Life" 
                         target="mynewtab" rel="noopener noreferrer">
                         <GitHubIcon className={classes.icon}
                             color="primary"
