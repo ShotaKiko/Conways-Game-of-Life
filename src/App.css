@@ -381,9 +381,17 @@ h5:hover {
 /* Smaller than Iphone X Mobile Size */
 @media screen and (max-height: 800px) and (max-width: 420px){
   img#hideOnMobile {
-    /* display: none; */
     max-width: 37.5%;
     height: auto;
+    display: none;
+  }
+
+  div#shift {
+    display: none;
+  }
+
+  img#theBird {
+    display: none;
   }
 
   .aboutDiv {
@@ -434,6 +442,7 @@ h5:hover {
   img#hideOnMobile {
    max-width: 30%;
    height: auto;
+   display: none;
   }
 
   .aboutModal {
