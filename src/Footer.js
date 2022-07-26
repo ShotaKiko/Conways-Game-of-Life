@@ -60,7 +60,7 @@ export default function Footer(){
             </Button>
 
             <Button
-              href="https://www.linkedin.com/in/shotakikozashvili/"
+              href="https://www.linkedin.com/in/shotakiko/"
               target="mynewtab"
               rel="noopener noreferrer"
             >
@@ -74,7 +74,7 @@ export default function Footer(){
             <Button
               target="mynewtab"
               rel="noopener noreferrer"
-              href="https://drive.google.com/file/d/1U2t7iGrju6ciEtnlChnELM3sCpJVSwjm/view?usp=sharing"
+              href="https://drive.google.com/file/d/1mdRRKaZLEZ5d_pdxfXoy9WwBczAMXM-e/view?usp=sharing"
             >
               <FindInPageIcon
                 className={classes.icon}
